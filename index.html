@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人博客</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- Tailwind配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF',
+            secondary: '#36D399',
+            dark: '#333333',
+            light: '#F8FAFC'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .transition-custom {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark antialiased">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a href="#" class="flex items-center">
+            <i class="fa fa-user-circle text-primary text-2xl mr-2"></i>
+            <span class="font-bold text-xl">个人博客</span>
+          </a>
+        </div>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#about" class="text-gray-700 hover:text-primary font-medium transition-custom">关于我</a>
+          <a href="#contact" class="text-gray-700 hover:text-primary font-medium transition-custom">联系方式</a>
+        </nav>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-gray-700 hover:text-primary focus:outline-none">
+            <i class="fa fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary">关于我</a>
+        <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary">联系方式</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section class="relative h-screen flex items-center justify-center bg-gradient-to-br from-primary/90 to-primary text-white overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-black/20"></div>
+      <!-- 背景装饰元素 -->
+      <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+          <div class="absolute top-10 left-10 w-40 h-40 rounded-full bg-white"></div>
+          <div class="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-white"></div>
+          <div class="absolute top-1/3 right-1/4 w-20 h-20 rounded-full bg-white"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <div class="max-w-3xl mx-auto">
+        <div class="rounded-full w-32 h-32 mx-auto mb-6 overflow-hidden border-4 border-white/30 shadow-lg">
+          <img src="https://picsum.photos/200/200?random=1" alt="个人头像" class="w-full h-full object-cover">
+        </div>
+        <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold mb-4 text-shadow leading-tight">
+          你好，我是<span class="text-secondary">片哥</span>
+        </h1>
+        <p class="text-[clamp(1rem,2vw,1.25rem)] mb-8 opacity-90">
+          欢迎来到我的个人博客，这里记录了我的学习和成长历程。
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#about" class="px-6 py-3 bg-white text-primary rounded-full font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-custom">
+            了解更多
+          </a>
+          <a href="#contact" class="px-6 py-3 bg-transparent border-2 border-white text-white rounded-full font-medium hover:bg-white/10 transition-custom">
+            联系我
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 向下滚动指示器 -->
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <a href="#about" class="text-white/80 hover:text-white">
+        <i class="fa fa-chevron-down text-2xl"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- 关于我区域 -->
+  <section id="about" class="py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-dark mb-4">关于我</h2>
+          <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="relative">
+            <div class="rounded-lg overflow-hidden shadow-xl transform transition-custom hover:scale-[1.02]">
+              <img src="https://picsum.photos/600/800?random=2" alt="个人照片" class="w-full h-auto">
+            </div>
+            <!-- 装饰元素 -->
+            <div class="absolute -bottom-6 -right-6 w-40 h-40 bg-primary/10 rounded-lg -z-10"></div>
+            <div class="absolute -top-6 -left-6 w-20 h-20 bg-secondary/10 rounded-lg -z-10"></div>
+          </div>
+          
+          <div class="space-y-6">
+            <h3 class="text-2xl font-bold text-dark">个人简介</h3>
+            <p class="text-gray-600 leading-relaxed">
+              我是一名热爱技术的开发者，拥有多年的前端开发经验。我擅长使用HTML、CSS、JavaScript等技术构建现代化的Web应用。
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              除了技术工作，我还喜欢阅读、旅行和摄影。我相信持续学习和分享是成长的关键，因此创建了这个博客来记录我的学习历程和经验分享。
+            </p>
+            
+            <div class="pt-4">
+              <h4 class="font-bold text-lg mb-4">个人技能</h4>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex items-center">
+                  <div class="w-3 h-3 rounded-full bg-primary mr-2"></div>
+                  <span>HTML5 & CSS3</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-3 h-3 rounded-full bg-primary mr-2"></div>
+                  <span>JavaScript</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-3 h-3 rounded-full bg-primary mr-2"></div>
+                  <span>React</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-3 h-3 rounded-full bg-primary mr-2"></div>
+                  <span>Vue</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-3 h-3 rounded-full bg-primary mr-2"></div>
+                  <span>响应式设计</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-3 h-3 rounded-full bg-primary mr-2"></div>
+                  <span>UI/UX设计</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系方式区域 -->
+  <section id="contact" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-dark mb-4">联系方式</h2>
+          <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+          <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+            如果你有任何问题或建议，欢迎通过以下方式联系我，我会尽快回复你。
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- 电话联系卡片 -->
+          <div class="bg-white rounded-xl shadow-lg p-8 transform transition-custom hover:-translate-y-2 hover:shadow-xl">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <i class="fa fa-phone text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">电话</h3>
+            <p class="text-center text-gray-600">189-8391-3309</p>
+            <div class="mt-6 text-center">
+              <a href="tel:18983913309" class="inline-block px-5 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-custom">
+                立即拨打
+              </a>
+            </div>
+          </div>
+          
+          <!-- QQ联系卡片 -->
+          <div class="bg-white rounded-xl shadow-lg p-8 transform transition-custom hover:-translate-y-2 hover:shadow-xl">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <i class="fa fa-qq text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">QQ</h3>
+            <p class="text-center text-gray-600">123456789</p>
+            <div class="mt-6 text-center">
+              <a href="tencent://message/?uin=123456789&Site=&Menu=yes" class="inline-block px-5 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-custom">
+                加我QQ
+              </a>
+            </div>
+          </div>
+          
+          <!-- 微信联系卡片 -->
+          <div class="bg-white rounded-xl shadow-lg p-8 transform transition-custom hover:-translate-y-2 hover:shadow-xl">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <i class="fa fa-weixin text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">微信</h3>
+            <p class="text-center text-gray-600">zhangsan</p>
+            <div class="mt-6 text-center">
+              <button id="wechat-btn" class="inline-block px-5 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-custom">
+                查看二维码
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 微信二维码模态框 -->
+        <div id="wechat-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300">
+          <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 transform scale-95 transition-transform duration-300">
+            <div class="text-center">
+              <h3 class="text-xl font-bold mb-4">我的微信二维码</h3>
+              <div class="bg-gray-100 p-4 rounded-lg mb-6">
+                <img src="https://picsum.photos/300/300?random=3" alt="微信二维码" class="w-64 h-64 mx-auto">
+              </div>
+              <p class="text-gray-600 mb-6">扫一扫，加我微信</p>
+              <button id="close-modal" class="px-5 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-custom">
+                关闭
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">个人博客</h3>
+            <p class="text-gray-400">
+              记录我的学习和成长历程，分享技术经验和生活感悟。
+            </p>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-bold mb-4">快速链接</h3>
+            <ul class="space-y-2">
+              <li><a href="#about" class="text-gray-400 hover:text-white transition-custom">关于我</a></li>
+              <li><a href="#contact" class="text-gray-400 hover:text-white transition-custom">联系方式</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-bold mb-4">关注我</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-custom">
+                <i class="fa fa-github"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-custom">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-custom">
+                <i class="fa fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+          <p>&copy; 2025 个人博客. 保留所有权利.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        navbar.classList.add('bg-white', 'shadow-md');
+        navbar.classList.remove('bg-white/90');
+      } else {
+        navbar.classList.remove('bg-white', 'shadow-md');
+        navbar.classList.add('bg-white/90');
+      }
+    });
+    
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // 关闭移动菜单
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
+    
+    // 微信二维码模态框
+    const wechatBtn = document.getElementById('wechat-btn');
+    const wechatModal = document.getElementById('wechat-modal');
+    const closeModal = document.getElementById('close-modal');
+    
+    wechatBtn.addEventListener('click', () => {
+      wechatModal.classList.remove('opacity-0', 'pointer-events-none');
+      wechatModal.querySelector('div').classList.remove('scale-95');
+      wechatModal.querySelector('div').classList.add('scale-100');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    closeModal.addEventListener('click', () => {
+      wechatModal.classList.add('opacity-0', 'pointer-events-none');
+      wechatModal.querySelector('div').classList.remove('scale-100');
+      wechatModal.querySelector('div').classList.add('scale-95');
+      document.body.style.overflow = '';
+    });
+    
+    // 点击模态框外部关闭
+    wechatModal.addEventListener('click', (e) => {
+      if (e.target === wechatModal) {
+        closeModal.click();
+      }
+    });
+    
+    // 初始化页面
+    window.addEventListener('DOMContentLoaded', () => {
+      // 触发滚动事件以正确设置导航栏样式
+      window.dispatchEvent(new Event('scroll'));
+    });
+  </script>
+</body>
+</html>
+    
